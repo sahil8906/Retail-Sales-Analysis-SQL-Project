@@ -19,6 +19,7 @@ Table Creation: A table named retail_sales is created to store the sales data. T
 CREATE DATABASE Retail_Sales_Analysis
 
 -- Create Table
+
 CREATE TABLE retail_sales
 	(
 		transactions_id INT NULL,
@@ -39,10 +40,16 @@ CREATE TABLE retail_sales
 --Basic Questions 
 
 Q1 How many sales we have?
-		SELECT COUNT(*) FROM retail_sales AS total_sales
+
+		SELECT 
+		COUNT(*) 
+		FROM retail_sales AS total_sales
 
 -- Q2 how many unique customers we have?
-		SELECT COUNT(DISTINCT customer_id) FROM retail_sales
+
+		SELECT
+		COUNT(DISTINCT customer_id)
+		FROM retail_sales
         
 -- Q3 How many category we have and what are they?
 		SELECT COUNT(DISTINCT category) AS total_category, 
