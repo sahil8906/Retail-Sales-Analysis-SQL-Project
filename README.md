@@ -52,18 +52,24 @@ Q1 How many sales we have?
 		FROM retail_sales
         
 -- Q3 How many category we have and what are they?
-		SELECT COUNT(DISTINCT category) AS total_category, 
+
+		SELECT 
+		COUNT(DISTINCT category) AS total_category, 
         GROUP_CONCAT(DISTINCT category) AS category_list
         from retail_sales
 
 -- Data Analysis & Business Key Problems & Answers
 
 -- Q1 Write a SQL query to retrieve all columns for sales made on '2022-11-05'
-		SELECT * FROM retail_sales
+
+		SELECT * 
+		FROM retail_sales
 		WHERE sale_date = '2022-11-05'
     
 -- Q2  Write a SQL query to retrieve all transactions where the category is 'Clothing' and the quantity sold is more than 3 in the month of Nov-2022:
-		SELECT * FROM retail_sales
+
+		SELECT * 
+		FROM retail_sales
 		WHERE category = "Clothing"
 		AND
 		quantity >= 4
@@ -72,25 +78,33 @@ Q1 How many sales we have?
 		ORDER BY sale_date ASC
     
 -- Q3 Write a SQL query to calculate the total sales (total_sale) for each category.
-		SELECT category,
+
+		SELECT 
+		category,
 		SUM(total_sale) AS total_sales
 		FROM retail_sales
 		GROUP BY category
 
 -- Q4 Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category.
-		 SELECT category, round(avg (age),2) as avg_age
+
+		 SELECT 
+		 category, 
+		 round(avg (age),2) as avg_age
 		 from retail_sales
 		 WHERE
 		 category= "Beauty"
 
 -- Q5  Write a SQL query to find all transactions where the total_sale is greater than 999.
+
 		 SELECT
 		 *
-		 FROM retail_sales
+		 FROM 
+		 retail_sales
 		 WHERE total_sale >= 999
 		 ORDER BY transactions_id
      
 -- Q6 Write a SQL query to find the total number of transactions (transaction_id) made by each gender in each category.
+
 		SELECT
 		category, 
 		gender, 
@@ -100,6 +114,7 @@ Q1 How many sales we have?
 		ORDER BY  category, gender
     
 -- Q7 Write a SQL query to calculate the average sale for each month. Find out best selling month in each year
+
 WITH monthly_sales AS (
 		SELECT
 			YEAR(sale_date) AS sales_year,
@@ -132,6 +147,7 @@ WHERE sale_rank = 1
 ORDER BY sales_year;
 
 -- Q8 Write a SQL query to find the top 5 customers based on the highest total sales
+
 	SELECT 
 	customer_id,
 	SUM(total_sale) as total_sale
@@ -141,6 +157,7 @@ ORDER BY sales_year;
 	LIMIT 5 OFFSET 0
 
 -- Q9  Write a SQL query to find the number of unique customers who purchased items from each category
+
 		SELECT 
         category,
         COUNT(DISTINCT(customer_id)) AS customers
@@ -149,6 +166,7 @@ ORDER BY sales_year;
         
 
 -- Q10 Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17): 
+
 	SELECT
 		CASE
 			WHEN HOUR(sale_time) <12 THEN 'MORNING'
