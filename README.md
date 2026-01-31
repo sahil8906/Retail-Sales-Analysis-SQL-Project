@@ -115,36 +115,36 @@ Q1 How many sales we have?
     
 -- Q7 Write a SQL query to calculate the average sale for each month. Find out best selling month in each year
 
-WITH monthly_sales AS (
-		SELECT
-			YEAR(sale_date) AS sales_year,
-			MONTH(sale_date) AS sales_month,
-			AVG(total_sale) AS avg_monthly_sales
-		FROM retail_sales
-		GROUP BY 
-			YEAR(sale_date),
-			MONTH(sale_date)
-),
+        WITH monthly_sales AS (
+		        SELECT
+			     YEAR(sale_date) AS sales_year,
+				MONTH(sale_date) AS sales_month,
+				AVG(total_sale) AS avg_monthly_sales
+			FROM retail_sales
+			GROUP BY 
+				YEAR(sale_date),
+				MONTH(sale_date)
+	),
 
-ranked_sales AS (
-    SELECT
-        sales_year,
-        sales_month,
-        avg_monthly_sales,
-        DENSE_RANK() OVER (
-            PARTITION BY sales_year
-            ORDER BY avg_monthly_sales DESC
-        ) AS sale_rank
-    FROM monthly_sales
-)
-
-SELECT
-    sales_year,
-    sales_month,
-    avg_monthly_sales
-FROM ranked_sales
-WHERE sale_rank = 1
-ORDER BY sales_year;
+			ranked_sales AS (
+			    SELECT
+			        sales_year,
+			        sales_month,
+			        avg_monthly_sales,
+			        DENSE_RANK() OVER (
+			            PARTITION BY sales_year
+			            ORDER BY avg_monthly_sales DESC
+			        ) AS sale_rank
+			    FROM monthly_sales
+			)
+			
+			SELECT
+			    sales_year,
+			    sales_month,
+			    avg_monthly_sales
+			FROM ranked_sales
+			WHERE sale_rank = 1
+			ORDER BY sales_year;
 
 -- Q8 Write a SQL query to find the top 5 customers based on the highest total sales
 
